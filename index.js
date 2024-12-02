@@ -17,13 +17,13 @@ res.send("Hello world")
 app.use("/api/user", userRoute)
 
 app.listen(PORT, ()=>{
-    console.log("port is running on 3000")
+    console.log("port is running on 3000");
     mongoose.connect((process.env.MONGODB_URI)
         
     ).then(()=>{
-        console.log("MongoDB connected")
+        console.log("MongoDB connected");
     }).catch((err)=>{
-        console.log(err)
+        console.log(err);
     })
     
 })
