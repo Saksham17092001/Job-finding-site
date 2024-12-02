@@ -2,14 +2,19 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const userRoute = require("./routes/user");
+const bodyParser = require("body-parser");
 dotenv.config();
 const PORT = process.env.PORT || 3000; 
 
-
+app.use(bodyParser.json());
+app.use(express.urlencoded({extended:true}));
 
 app.get("/",(req,res)=>{
 res.send("Hello world")
 })
+
+app.use("/api/user", userRoute)
 
 app.listen(PORT, ()=>{
     console.log("port is running on 3000")
