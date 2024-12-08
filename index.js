@@ -21,7 +21,7 @@ app.use("/api/job",jobRoute);
 app.listen(PORT, ()=>{
     console.log("port is running on 3000");
     mongoose.connect((process.env.MONGODB_URI)
-        
+    
     ).then(()=>{
         console.log("MongoDB connected");
     }).catch((err)=>{
