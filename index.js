@@ -5,7 +5,9 @@ const mongoose = require("mongoose");
 const userRoute = require("./routes/user");
 const jobRoute = require("./routes/job");
 const bodyParser = require("body-parser");
+const cors = require("cors")
 dotenv.config();
+app.use(cors())
 const PORT = process.env.PORT || 3000; 
 
 app.use(bodyParser.json());

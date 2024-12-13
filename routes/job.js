@@ -6,10 +6,23 @@ const authMiddleware = require("../middleware/auth");
 dotenv.config();
 
 router.get("/", async (req, res) => {
+    const { limit, offset, name, salary } = req.query;
+    const query = {};
+
+    if(name) {
+        query.companyName = { $regex: name, $options: "i" }
+    };
+    if(salary) {
+        query.salary = salary;
+    }
     try {
-        const jobs = await Job.find();
-        res.status(200).json(jobs);
+        const jobs = await Job.find(query)
+            .skip(offset || 0)
+            .limit(limit || 10);
+        const count = await Job.countDocuments(query)
+        res.status(200).json({jobs,count});
     } catch (err) {
+        console.error("Error retrieving jobs:", err); // Log the actual error
         res.status(500).json({ message: "Error retrieving jobs" });
     }
 });
